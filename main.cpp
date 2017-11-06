@@ -21,6 +21,7 @@ int main(){
     lista->adicionar(NULL, estad, 1);
     lista->adicionar(lista->get_raiz(), estad2, 1);
     lista->adicionar(lista->get_raiz(), estad3, 1);
+    lista->imprime();
     lista->apagar(lista->get_raiz()->get_filho()->get_ID());
     delete lista;
 
