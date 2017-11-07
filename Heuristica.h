@@ -5,13 +5,18 @@ class Heuristica{
     private:
 
     public:
-        Heuristica();
-        int nPretas(int* estado);
+        Heuristica(){};
+        int nPecas(int* estado, int tam_N);
 };
 
-int Heuristica::nPretas(int* estado, int tam_N){
+int Heuristica::nPecas(int* estado, int tam_N){
     int quant = 0;
-    for(int i = 0; i<tam_N ; i++){
+    int i = 0;
+    for(; i<tam_N ; i++){
+        if(estado[i]>0)
+            quant++;
+    }
+    for(; i<(2*tam_N)+1 ; i++){
         if(estado[i]<0)
             quant++;
     }
