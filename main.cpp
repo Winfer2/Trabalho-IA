@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Lista.h"
 #include "Heuristica.h"
+#include "Movimento.h"
 
 using namespace std;
 
