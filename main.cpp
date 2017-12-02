@@ -2,9 +2,11 @@
 #include "Lista.h"
 #include "Heuristica.h"
 #include "Movimento.h"
+#include "nao_informados.h"
 
 using namespace std;
 
+/*
 int main(){
     int* estad = new int[3];
     estad[0] = -1;
@@ -25,5 +27,17 @@ int main(){
     cout<<a->nPecas(estad2,2);
 
     cout << "\n\n\nHello world!" << endl;
+    return 0;
+}
+*/
+
+
+/// TESTE DO BACKTRAKING
+int main(){
+    int n_pecas = 2;
+    Backtracking *backtracking = new Backtracking(n_pecas);
+    cout << backtracking->get_N_pecas();
+    backtracking->mostrar_jogo();
+
     return 0;
 }
