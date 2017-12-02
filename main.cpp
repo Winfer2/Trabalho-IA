@@ -36,7 +36,7 @@ int main(){
 int main(){
     int n_pecas = 2;
     Backtracking *backtracking = new Backtracking(n_pecas);
-    cout << backtracking->get_N_pecas();
+    backtracking->avanca();
     backtracking->mostrar_jogo();
 
     return 0;
