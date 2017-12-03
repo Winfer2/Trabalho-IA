@@ -65,61 +65,31 @@ bool Backtracking::volta_estado(){
 }
 
 bool Backtracking::avanca(){
+    int *save = new int[2*N_pecas+1];
 
     mostrar_jogo();
-
-    int *save = new int[2*N_pecas+1];
-//    cin.get();
 
     if(verifica_final()){
         lista->adicionar(lista->get_ultimo(), jogo, N_pecas);
         return true;
     }
 
-    if(movimento->moveR1(jogo)){
-        for(int i = 0; i < 2*N_pecas+1; i++) save[i] = jogo[i];
-        lista->adicionar(lista->get_ultimo(), save, N_pecas);
-        avanca();
-        if(verifica_final()){
-            lista->adicionar(lista->get_ultimo(), jogo, N_pecas);
-            return true;
+    for(int m = 1; m <= 4; m++){
+        if(movimento->mover(m, jogo)){
+            for(int i = 0; i < 2*N_pecas+1; i++) save[i] = jogo[i];
+            lista->adicionar(lista->get_ultimo(), save, N_pecas);
+            avanca();
+            if(verifica_final()){
+                lista->adicionar(lista->get_ultimo(), jogo, N_pecas);
+                return true;
+            }
         }
-
-    }
-    if(movimento->moveR2(jogo)){
-        for(int i = 0; i < 2*N_pecas+1; i++) save[i] = jogo[i];
-        lista->adicionar(lista->get_ultimo(), save, N_pecas);
-        avanca();
-        if(verifica_final()){
-            lista->adicionar(lista->get_ultimo(), jogo, N_pecas);
-            return true;
-        }
-
-    }
-    if(movimento->moveR3(jogo)){
-        for(int i = 0; i < 2*N_pecas+1; i++) save[i] = jogo[i];
-        lista->adicionar(lista->get_ultimo(), save, N_pecas);
-        avanca();
-        if(verifica_final()){
-            lista->adicionar(lista->get_ultimo(), jogo, N_pecas);
-            return true;
-        }
-
-    }
-    if(movimento->moveR4(jogo)){
-        for(int i = 0; i < 2*N_pecas+1; i++) save[i] = jogo[i];
-        lista->adicionar(lista->get_ultimo(), save, N_pecas);
-        avanca();
-        if(verifica_final()){
-            lista->adicionar(lista->get_ultimo(), jogo, N_pecas);
-            return true;
-        }
-
     }
 
     if(!volta_estado()) return false;
     mostrar_jogo();
     return false;
+
 }
 
 void Backtracking::mostrar_jogo(){

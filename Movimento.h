@@ -12,6 +12,7 @@ class Movimento
         bool moveR2(int* estado);
         bool moveR3(int* estado);
         bool moveR4(int* estado);
+        bool mover(int mov, int* estado);
 };
 
 int Movimento::achaVazio(int* estado)
@@ -69,6 +70,15 @@ bool Movimento::moveR4(int* estado)
                 return true;
             }
     return false;
+}
+
+bool Movimento::mover(int mov, int* estado){
+    switch(mov){
+        case 1: return moveR1(estado);
+        case 2: return moveR2(estado);
+        case 3: return moveR3(estado);
+        case 4: return moveR4(estado);
+    }
 }
 
 
