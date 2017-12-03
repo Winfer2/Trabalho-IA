@@ -37,8 +37,11 @@ int main(){
 int main(){
     int n_pecas = 2;
     Backtracking *backtracking = new Backtracking(n_pecas);
-    backtracking->avanca();
-    backtracking->mostrar_jogo();
+
+    if(backtracking->avanca()) cout << "\n\nSOLUCAO ENCONTRADA\n\n";
+    else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
+
+//    backtracking->mostrar_jogo();
 
     return 0;
 }

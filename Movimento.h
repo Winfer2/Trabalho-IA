@@ -18,6 +18,7 @@ int Movimento::achaVazio(int* estado)
 {
     int i;
     for(i = 0; estado[i] != 0; i++);
+
     return i;
 }
 
@@ -62,7 +63,7 @@ bool Movimento::moveR4(int* estado)
 //    cout << "\nmovimento 4" << endl;
     int i = achaVazio(estado);
     if(i+2 < (2*tam_N+1))
-        if(estado[i+1] < 0)
+        if(estado[i+2] < 0)
             {
                 swap(estado[i], estado[i+2]);
                 return true;
