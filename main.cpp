@@ -1,9 +1,12 @@
 #include <iostream>
+#include <math.h>
 #include "Lista.h"
 #include "Heuristica.h"
 #include "Guloso.h"
 #include "Movimento.h"
 #include "nao_informados.h"
+#include <fstream>
+#include <time.h>
 
 using namespace std;
 
@@ -60,12 +63,41 @@ int main(){
 
 /// TESTE DA BUSCA EM PROFUNDIDADE
 int main(){
-    int n_pecas = 4;
-    N_inf *n_inf = new N_inf(n_pecas);
+    int n_pecas;
+    N_inf *n_inf;
 
-    if(n_inf->profundidade()) cout << "\n\nSOLUCAO ENCONTRADA\n\n";
-    else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
+    ofstream arq;
+    string nomeArq = "profundidade.txt";
+    float valor;
+    double tempo_total;
 
+    clock_t tInicio, tFim;
+
+    arq.open(nomeArq.c_str(), ofstream::app);
+
+    for(int i = 0; i <= 20; i++){
+        n_pecas = i;
+        arq << n_pecas;
+
+        for(int k = 0; k < 32; k++){
+            n_inf = new N_inf(n_pecas);
+
+            tInicio = clock();
+
+            if(n_inf->profundidade()) cout << i << "\t" << k << endl;
+            else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
+
+//            cin.get();
+
+            tFim = clock();
+
+            tempo_total = 1000*(((double)(tFim - tInicio)) / ((double)CLOCKS_PER_SEC));
+
+            if(k != 0) arq << "\t" << tempo_total;
+            delete n_inf;
+        }
+        arq << endl;
+    }
+    arq.close();
     return 0;
 }
-

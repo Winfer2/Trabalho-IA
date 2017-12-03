@@ -28,12 +28,14 @@ class No_Lista{
 };
 
 No_Lista::No_Lista(No_Lista* no_pai, No_Lista* no_est_ant, int prof, int tamN, int* estad, int I_D){
+    estado = new int[tamN];
+    for(int i = 0; i < tamN; i++) estado[i] = estad[i];
+//    estado = estad;
     ID = I_D;
     pai = no_pai;
     est_ant = no_est_ant;
     profundidade = prof;
     tam_N = tamN;
-    estado = estad;
     filho = NULL;
 }
 
@@ -91,7 +93,7 @@ void Lista::apagar(int I_D){
     if(temp->get_filho() != NULL) temp->get_filho()->set_pai(temp->get_pai());
     else ultimo = temp->get_pai();
 
-    //delete temp;
+    delete temp;
     tamanho--;
 }
 
