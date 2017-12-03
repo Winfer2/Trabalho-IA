@@ -91,7 +91,7 @@ void Lista::apagar(int I_D){
     if(temp->get_filho() != NULL) temp->get_filho()->set_pai(temp->get_pai());
     else ultimo = temp->get_pai();
 
-    delete temp;
+    //delete temp;
     tamanho--;
 }
 

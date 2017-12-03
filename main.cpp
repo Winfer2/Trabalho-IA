@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Lista.h"
 #include "Heuristica.h"
+#include "Guloso.h"
 #include "Movimento.h"
 #include "nao_informados.h"
 
@@ -8,23 +9,23 @@ using namespace std;
 
 /*
 int main(){
-    int* estad = new int[3];
-    estad[0] = -1;
-    estad[1] = 0;
-    estad[2] = 1;
-    int* estad2 = new int[5];
-    estad2[0] = 2;
-    estad2[1] = 1;
-    estad2[2] = 0;
-    estad2[3] = 1;
-    estad2[4] = -2;
-    int* estad3 = new int[3];
-    estad3[0] = -3;
-    estad3[1] = 1;
-    estad3[2] = 3;
-
-    Heuristica *a= new Heuristica();
-    cout<<a->nPecas(estad2,2);
+    int n=5;
+    int* estad = new int[(2*n)+1];
+    int i = 0;
+    for(; i<n ; i++){
+        estad[i]=1;
+    }
+    estad[i]=0;
+    i++;
+    for(; i<(2*n)+1 ; i++){
+        estad[i]=-1;
+    }
+    for(i=0; i<(2*n)+1 ; i++){
+        //cout<<estad[i]<<endl;
+    }
+    Guloso* guloso = new Guloso(estad,n);
+    guloso->resolve();
+    guloso->caminho();
 
     cout << "\n\n\nHello world!" << endl;
     return 0;

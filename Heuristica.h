@@ -16,6 +16,7 @@ int Heuristica::nPecas(int* estado, int tam_N){
         if(estado[i]>0)
             quant++;
     }
+    i++;
     for(; i<(2*tam_N)+1 ; i++){
         if(estado[i]<0)
             quant++;
