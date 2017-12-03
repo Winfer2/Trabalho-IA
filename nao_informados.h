@@ -4,25 +4,25 @@
 #include "Lista.h"
 #include "Movimento.h"
 
-class Backtracking{
+class N_inf{
     private:
         int N_pecas;
         int *jogo;
-        int ultimo_movimento;
         Movimento *movimento;
         bool verifica_final();
-        bool volta_estado();
+        bool bt_volta_estado();
         Lista *lista;
+        Lista *fechados;
 
     public:
-        Backtracking(int n_pecas);
-        int get_N_pecas(){ return N_pecas; }
+        N_inf(int n_pecas);
         void mostrar_jogo();
-        bool avanca();
+        bool backtracking();
+        bool largura();
+        bool profundidade();
 };
 
-Backtracking::Backtracking(int n_pecas){
-    lista = new Lista();
+N_inf::N_inf(int n_pecas){
 
     // cria o estado inicial do jogo
     N_pecas = n_pecas;
@@ -34,6 +34,8 @@ Backtracking::Backtracking(int n_pecas){
     }
 
     // adiciona estado inical na lista
+    lista = new Lista();
+    fechados = new Lista();
     int *save = new int[2*N_pecas+1];
     for(int i = 0; i < 2*N_pecas+1; i++) save[i] = jogo[i];
     lista->adicionar(NULL, save, N_pecas);
@@ -43,7 +45,7 @@ Backtracking::Backtracking(int n_pecas){
 
 }
 
-bool Backtracking::verifica_final(){
+bool N_inf::verifica_final(){
     for(int i = 0; i <= N_pecas; i++){
         if(i < N_pecas && jogo[i] != -1) return false;
         if(i == N_pecas && jogo[i] != 0) return false;
@@ -51,7 +53,7 @@ bool Backtracking::verifica_final(){
     return true;
 }
 
-bool Backtracking::volta_estado(){
+bool N_inf::bt_volta_estado(){
 
     // verifica jogo impossivel
     if(lista->get_ultimo()->get_ID() == lista->get_raiz()->get_ID()){
@@ -64,7 +66,7 @@ bool Backtracking::volta_estado(){
     return true;
 }
 
-bool Backtracking::avanca(){
+bool N_inf::backtracking(){
     int *save = new int[2*N_pecas+1];
 
     mostrar_jogo();
@@ -78,7 +80,7 @@ bool Backtracking::avanca(){
         if(movimento->mover(m, jogo)){
             for(int i = 0; i < 2*N_pecas+1; i++) save[i] = jogo[i];
             lista->adicionar(lista->get_ultimo(), save, N_pecas);
-            avanca();
+            backtracking();
             if(verifica_final()){
                 lista->adicionar(lista->get_ultimo(), jogo, N_pecas);
                 return true;
@@ -86,17 +88,64 @@ bool Backtracking::avanca(){
         }
     }
 
-    if(!volta_estado()) return false;
+    if(!bt_volta_estado()) return false;
     mostrar_jogo();
     return false;
-
 }
 
-void Backtracking::mostrar_jogo(){
+void N_inf::mostrar_jogo(){
     cout << endl;
     for(int i = 0; i < 2*N_pecas+1; i++){
         cout << jogo[i] << "\t";
     }
 }
 
+bool N_inf::largura(){
+    int *save;
+
+    for(int m = 1; m <= 4; m++){
+        save = new int[2*N_pecas+1];
+        for(int i = 0; i < 2*N_pecas+1; i++) save[i] = jogo[i];
+        if(movimento->mover(m, save)) lista->adicionar(lista->get_ultimo(), save, N_pecas);
+    }
+
+    if(verifica_final()) return true;
+
+    // remove raiz
+    if(lista->get_tamanho() == 0) return false;
+    lista->apagar(lista->get_raiz()->get_ID());
+
+    // jogo vira o estado da nova raiz
+    for(int i = 0; i < 2*N_pecas+1; i++) jogo[i] = lista->get_raiz()->get_estado()[i];
+
+    lista->imprime();
+    cout << "\n";
+
+    return largura();
+
+}
+
+bool N_inf::profundidade(){
+    int *save;
+
+    for(int m = 1; m <= 4; m++){
+        save = new int[2*N_pecas+1];
+        for(int i = 0; i < 2*N_pecas+1; i++) save[i] = jogo[i];
+        if(movimento->mover(m, save)) lista->adicionar(lista->get_ultimo(), save, N_pecas);
+    }
+
+    if(verifica_final()) return true;
+
+    // jogo vira o estado da nova raiz
+    for(int i = 0; i < 2*N_pecas+1; i++) jogo[i] = lista->get_ultimo()->get_estado()[i];
+
+    lista->imprime();
+    cout << "\n";
+
+    // remove raiz
+    if(lista->get_tamanho() == 0) return false;
+    lista->apagar(lista->get_ultimo()->get_ID());
+
+    return profundidade();
+}
 #endif // NAO_INFORMADO_H_INCLUDED

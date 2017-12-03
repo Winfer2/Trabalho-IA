@@ -32,16 +32,40 @@ int main(){
 }
 */
 
-
+/*
 /// TESTE DO BACKTRAKING
 int main(){
-    int n_pecas = 2;
-    Backtracking *backtracking = new Backtracking(n_pecas);
+    int n_pecas = 4;
+    N_inf *n_inf = new N_inf(n_pecas);
 
-    if(backtracking->avanca()) cout << "\n\nSOLUCAO ENCONTRADA\n\n";
+    if(n_inf->backtracking()) cout << "\n\nSOLUCAO ENCONTRADA\n\n";
     else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
-
-//    backtracking->mostrar_jogo();
 
     return 0;
 }
+*/
+
+/*
+/// TESTE DA BUSCA EM LARGURA
+int main(){
+    int n_pecas = 4;
+    N_inf *n_inf = new N_inf(n_pecas);
+
+    if(n_inf->largura()) cout << "\n\nSOLUCAO ENCONTRADA\n\n";
+    else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
+
+    return 0;
+}
+*/
+
+/// TESTE DA BUSCA EM PROFUNDIDADE
+int main(){
+    int n_pecas = 4;
+    N_inf *n_inf = new N_inf(n_pecas);
+
+    if(n_inf->profundidade()) cout << "\n\nSOLUCAO ENCONTRADA\n\n";
+    else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
+
+    return 0;
+}
+
