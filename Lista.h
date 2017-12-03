@@ -57,9 +57,9 @@ class Lista{
 void Lista::imprime(){
     No_Lista* temp = raiz;
     while(temp != NULL){
+        cout << temp->get_ID() << "-\t";
         for(int i = 0; i < (2*temp->get_N()+1); i++){
-            cout << temp->get_ID();
-            cout << ")" << temp->get_estado()[i] << "\t";
+            cout << temp->get_estado()[i] << "\t";
         }cout << "\n";
         temp = temp->get_filho();
     }
@@ -84,6 +84,7 @@ void Lista::apagar(int I_D){
 
     No_Lista *temp = raiz;
     while(temp->get_ID() != I_D) temp = temp->get_filho();
+
     if(temp->get_pai() != NULL) temp->get_pai()->set_filho(temp->get_filho());
     else raiz = temp->get_filho();
 
