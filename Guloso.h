@@ -44,19 +44,12 @@ void Guloso::resolve(){
             abertos->get_ultimo()->get_est_ant(),
             abertos->get_ultimo()->get_estado(),
             tam_N);
-        if (verifica())
+        if (verifica()){
+            std::cout<<abertos->get_tamanho()+fechados->get_tamanho()<<std::endl;
             return;
+        }
         abertos->apagar(abertos->get_ultimo()->get_ID());
         bestMove();
-        /*
-        std::cout<<abertos->get_ultimo()->get_estado()[0]<<std::endl;
-        std::cout<<abertos->get_ultimo()->get_estado()[1]<<std::endl;
-        std::cout<<abertos->get_ultimo()->get_estado()[2]<<std::endl;
-        std::cout<<abertos->get_ultimo()->get_estado()[3]<<std::endl;
-        std::cout<<abertos->get_ultimo()->get_estado()[4]<<std::endl;
-        std::cout<<abertos->get_ultimo()->get_estado()[5]<<std::endl;
-        std::cout<<abertos->get_ultimo()->get_estado()[6]<<std::endl;
-        std::cout<<std::endl;*/
         //if(i==5)
         //return;
     }
