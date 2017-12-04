@@ -1,5 +1,9 @@
 #include <iostream>
+<<<<<<< HEAD
 #include <time.h>
+=======
+#include <math.h>
+>>>>>>> be13d81bdef4e1ef564ef18c10dd532e00ef774e
 #include "Lista.h"
 #include "Heuristica.h"
 #include "Guloso.h"
@@ -7,7 +11,8 @@
 #include "nao_informados.h"
 #include "Aestrela.h"
 #include "IDA.h"
-
+#include <fstream>
+#include <time.h>
 
 using namespace std;
 
@@ -85,39 +90,74 @@ IDA*
 */
 
 /*
-/// TESTE DO BACKTRAKING
+/// TESTE DE TEMPO DOS METODOS NAO ORDENADOS
 int main(){
-    int n_pecas = 4;
-    N_inf *n_inf = new N_inf(n_pecas);
+    int n_pecas;
+    N_inf *n_inf;
 
-    if(n_inf->backtracking()) cout << "\n\nSOLUCAO ENCONTRADA\n\n";
-    else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
+    ofstream arq;
+    string nomeArq = "ordenada_2.txt";
+    float valor;
+    double tempo_total;
 
-    return 0;
-}
-*/
+    clock_t tInicio, tFim;
 
-/*
-/// TESTE DA BUSCA EM LARGURA
-int main(){
-    int n_pecas = 4;
-    N_inf *n_inf = new N_inf(n_pecas);
+    arq.open(nomeArq.c_str(), ofstream::app);
 
-    if(n_inf->largura()) cout << "\n\nSOLUCAO ENCONTRADA\n\n";
-    else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
+    for(int i = 1; i <= 12; i++){
+        n_pecas = i;
+        arq << n_pecas;
 
+        for(int k = 0; k < 32; k++){
+            n_inf = new N_inf(n_pecas);
+
+            tInicio = clock();
+
+            if(n_inf->ordenada()) cout << i << "\t" << k << endl;
+            else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
+
+//            cin.get();
+
+            tFim = clock();
+
+            tempo_total = 1000*(((double)(tFim - tInicio)) / ((double)CLOCKS_PER_SEC));
+
+            if(k != 0) arq << "\t" << tempo_total;
+            delete n_inf;
+        }
+        arq << endl;
+    }
+    arq.close();
     return 0;
 }
 */
 /*
 /// TESTE DA BUSCA EM PROFUNDIDADE
+
+/// TESTE DE MEMORIA DOS METODOS NAO ORDENADOS
 int main(){
-    int n_pecas = 4;
-    N_inf *n_inf = new N_inf(n_pecas);
+    int n_pecas;
+    N_inf *n_inf;
 
-    if(n_inf->profundidade()) cout << "\n\nSOLUCAO ENCONTRADA\n\n";
-    else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
+    ofstream arq;
+    string nomeArq = "ordenada_memoria.txt";
 
+    arq.open(nomeArq.c_str(), ofstream::app);
+
+    for(int i = 1; i <= 12; i++){
+        n_pecas = i;
+        arq << n_pecas;
+
+        n_inf = new N_inf(n_pecas);
+
+        if(n_inf->ordenada()) cout << i << endl;
+        else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
+
+        arq << "\t" << n_inf->get_tam_lista();
+        delete n_inf;
+        arq << endl;
+    }
+    arq.close();
     return 0;
 }
 */
