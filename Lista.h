@@ -30,7 +30,6 @@ class No_Lista{
 No_Lista::No_Lista(No_Lista* no_pai, No_Lista* no_est_ant, int prof, int tamN, int* estad, int I_D){
     estado = new int[tamN];
     for(int i = 0; i < tamN; i++) estado[i] = estad[i];
-//    estado = estad;
     ID = I_D;
     pai = no_pai;
     est_ant = no_est_ant;
@@ -44,14 +43,16 @@ class Lista{
         No_Lista* raiz;
         No_Lista* ultimo;
         int tamanho;
+        int cont_id;
 
     public:
-        Lista(){raiz = NULL; ultimo = NULL; tamanho = 0;}
+        Lista(){raiz = NULL; ultimo = NULL; tamanho = 0; cont_id = 0;}
         ~Lista(){ while(ultimo != NULL) apagar(ultimo->get_ID()); }
         No_Lista* get_ultimo(){return ultimo;}
         No_Lista* get_raiz(){return raiz;}
         int get_tamanho(){return tamanho;}
         void adicionar(No_Lista* no_est_ant, int* estad, int tam_N);
+        void adicionar_ord(No_Lista* no_est_ant, int* estad, int tam_N, int objetivo);
         void apagar(int I_D);
         void imprime();
 };
@@ -79,6 +80,50 @@ void Lista::adicionar(No_Lista* no_est_ant, int* estad, int tam_N){
     ultimo->set_filho(no);
     ultimo = no;
     tamanho++;
+    cont_id++;
+}
+
+void Lista::adicionar_ord(No_Lista* no_est_ant, int* estad, int tam_N, int objetivo){
+    if(tamanho == 0){
+        No_Lista* no = new No_Lista(ultimo, no_est_ant, objetivo, tam_N, estad, cont_id);
+        raiz = ultimo = no;
+        tamanho++;
+        cont_id++;
+        return;
+    }
+
+    No_Lista* no = new No_Lista(ultimo, no_est_ant, objetivo, tam_N, estad, cont_id);
+
+    if(raiz->get_profundidade() <= objetivo){
+        // eu sou raiz
+
+        no->set_pai(NULL);
+        no->set_filho(raiz);
+        no->get_filho()->set_pai(no);
+        raiz = no;
+
+    }else if(ultimo->get_profundidade() >= objetivo){
+        // eu sou o ultimo
+
+        no->set_filho(NULL);
+        no->set_pai(ultimo);
+        no->get_pai()->set_filho(no);
+        ultimo = no;
+
+    }else{
+        // to no meio
+        No_Lista *temp = raiz;
+        while(temp->get_profundidade() > objetivo) temp = temp->get_filho();
+
+        no->set_pai(temp->get_pai());
+        no->set_filho(temp);
+        no->get_filho()->set_pai(no);
+        no->get_pai()->set_filho(no);
+
+    }
+
+    tamanho++;
+    cont_id++;
 }
 
 void Lista::apagar(int I_D){

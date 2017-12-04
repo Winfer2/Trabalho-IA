@@ -36,38 +36,13 @@ int main(){
 */
 
 /*
-/// TESTE DO BACKTRAKING
-int main(){
-    int n_pecas = 4;
-    N_inf *n_inf = new N_inf(n_pecas);
-
-    if(n_inf->backtracking()) cout << "\n\nSOLUCAO ENCONTRADA\n\n";
-    else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
-
-    return 0;
-}
-*/
-
-/*
-/// TESTE DA BUSCA EM LARGURA
-int main(){
-    int n_pecas = 4;
-    N_inf *n_inf = new N_inf(n_pecas);
-
-    if(n_inf->largura()) cout << "\n\nSOLUCAO ENCONTRADA\n\n";
-    else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
-
-    return 0;
-}
-*/
-
-/// TESTE DA BUSCA EM PROFUNDIDADE
+/// TESTE DE TEMPO DOS METODOS NAO ORDENADOS
 int main(){
     int n_pecas;
     N_inf *n_inf;
 
     ofstream arq;
-    string nomeArq = "profundidade.txt";
+    string nomeArq = "ordenada_2.txt";
     float valor;
     double tempo_total;
 
@@ -75,7 +50,7 @@ int main(){
 
     arq.open(nomeArq.c_str(), ofstream::app);
 
-    for(int i = 0; i <= 20; i++){
+    for(int i = 1; i <= 12; i++){
         n_pecas = i;
         arq << n_pecas;
 
@@ -84,7 +59,7 @@ int main(){
 
             tInicio = clock();
 
-            if(n_inf->profundidade()) cout << i << "\t" << k << endl;
+            if(n_inf->ordenada()) cout << i << "\t" << k << endl;
             else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
 
 //            cin.get();
@@ -96,6 +71,34 @@ int main(){
             if(k != 0) arq << "\t" << tempo_total;
             delete n_inf;
         }
+        arq << endl;
+    }
+    arq.close();
+    return 0;
+}
+*/
+
+/// TESTE DE MEMORIA DOS METODOS NAO ORDENADOS
+int main(){
+    int n_pecas;
+    N_inf *n_inf;
+
+    ofstream arq;
+    string nomeArq = "ordenada_memoria.txt";
+
+    arq.open(nomeArq.c_str(), ofstream::app);
+
+    for(int i = 1; i <= 12; i++){
+        n_pecas = i;
+        arq << n_pecas;
+
+        n_inf = new N_inf(n_pecas);
+
+        if(n_inf->ordenada()) cout << i << endl;
+        else cout << "\n\nPROBLEMA IMPOSSIVEL\n\n";
+
+        arq << "\t" << n_inf->get_tam_lista();
+        delete n_inf;
         arq << endl;
     }
     arq.close();
