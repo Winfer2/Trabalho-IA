@@ -1,9 +1,5 @@
 #include <iostream>
-<<<<<<< HEAD
-#include <time.h>
-=======
 #include <math.h>
->>>>>>> be13d81bdef4e1ef564ef18c10dd532e00ef774e
 #include "Lista.h"
 #include "Heuristica.h"
 #include "Guloso.h"
@@ -20,7 +16,7 @@ using namespace std;
 int main(){
     clock_t start, end;
     double cpu_time_used;
-    for(int n=1;n<13;n++){
+    for(int n=2;n<3;n++){
     int* estad = new int[(2*n)+1];
     int i = 0;
     for(; i<n ; i++){

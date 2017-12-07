@@ -114,6 +114,7 @@ void IDA::reseta(){
         descartados->apagar(descartados->get_ultimo()->get_ID());
     }
     patamar=20*novoPatamar;
+    std::cout<<patamar<<endl;
     abertos->adicionar(NULL,estadoInicial,tam_N);
     while(fechados->get_ultimo()!=NULL){
         fechados->apagar(fechados->get_ultimo()->get_ID());
