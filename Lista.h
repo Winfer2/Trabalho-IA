@@ -8,11 +8,13 @@ using namespace std;
 class No_Lista{
     private:
         No_Lista* pai;
-        No_Lista* filho;        No_Lista* est_ant;
+        No_Lista* filho;
+        No_Lista* est_ant;
         int profundidade;
         int ID;
         int* estado;
-        int tam_N;
+        int tam_N;
+
     public:
         No_Lista(No_Lista* no_pai, No_Lista* no_est_ant, int prof, int tamN, int* estad, int I_D);
         ~No_Lista(){delete[] estado;}
@@ -29,7 +31,7 @@ class No_Lista{
 
 No_Lista::No_Lista(No_Lista* no_pai, No_Lista* no_est_ant, int prof, int tamN, int* estad, int I_D){
     estado = new int[tamN];
-    for(int i = 0; i < tamN; i++) estado[i] = estad[i];
+    for(int i = 0; i < 2*tamN+1; i++) estado[i] = estad[i];
     ID = I_D;
     pai = no_pai;
     est_ant = no_est_ant;
